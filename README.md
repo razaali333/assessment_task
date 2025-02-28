@@ -1,67 +1,185 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel API with Passport Authentication
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a **RESTful API** built with **Laravel 11** and **Laravel Passport** for authentication.
 
-## About Laravel
+## 🚀 Setup Instructions
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 2️⃣ Install Dependencies
+```bash
+composer install
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 3️⃣ Configure Environment
+- Copy the `.env.example` file and rename it to `.env`:
+  ```bash
+  cp .env.example .env
+  ```
+- Open `.env` and set your database details:
+  ```ini
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=your_database_name
+  DB_USERNAME=root
+  DB_PASSWORD=your_password
+  ```
 
-## Learning Laravel
+### 4️⃣ Generate Application Key
+```bash
+php artisan key:generate
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 5️⃣ Run Database Migrations & Seeding
+```bash
+php artisan migrate --seed
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 6️⃣ Install Laravel Passport
+```bash
+php artisan passport:install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 7️⃣ Start the Development Server
+```bash
+php artisan serve
+```
+The API is now available at:
+```
+http://127.0.0.1:8000/api/
+```
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠 API Documentation
 
-### Premium Partners
+### 📌 Authentication Routes
+| Method | Endpoint          | Description           | Auth Required |
+|--------|------------------|----------------------|--------------|
+| `POST` | `/api/register`  | Register a new user  | ❌ No        |
+| `POST` | `/api/login`     | Login user           | ❌ No        |
+| `POST` | `/api/logout`    | Logout user          | ✅ Yes       |
+| `GET`  | `/api/user`      | Get authenticated user | ✅ Yes       |
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 📌 Users
+| Method | Endpoint        | Description      | Auth Required |
+|--------|----------------|------------------|--------------|
+| `GET`  | `/api/users`   | List all users   | ✅ Yes       |
+| `GET`  | `/api/users/{id}` | Get user details | ✅ Yes       |
+| `POST` | `/api/users`   | Create a user    | ✅ Yes       |
+| `PUT`  | `/api/users/{id}` | Update user  | ✅ Yes       |
+| `DELETE` | `/api/users/{id}` | Delete user | ✅ Yes       |
 
-## Contributing
+### 📌 Projects
+| Method | Endpoint          | Description            | Auth Required |
+|--------|------------------|------------------------|--------------|
+| `GET`  | `/api/projects`  | Get all projects      | ✅ Yes       |
+| `GET`  | `/api/projects/{id}` | Get project details | ✅ Yes       |
+| `POST` | `/api/projects`  | Create a project      | ✅ Yes       |
+| `PUT`  | `/api/projects/{id}` | Update project     | ✅ Yes       |
+| `DELETE` | `/api/projects/{id}` | Delete project | ✅ Yes       |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 📌 Timesheets
+| Method | Endpoint           | Description                | Auth Required |
+|--------|-------------------|----------------------------|--------------|
+| `GET`  | `/api/timesheets`  | Get all timesheets        | ✅ Yes       |
+| `GET`  | `/api/timesheets/{id}` | Get timesheet details  | ✅ Yes       |
+| `POST` | `/api/timesheets`  | Create a timesheet entry  | ✅ Yes       |
+| `PUT`  | `/api/timesheets/{id}` | Update timesheet       | ✅ Yes       |
+| `DELETE` | `/api/timesheets/{id}` | Delete timesheet  | ✅ Yes       |
 
-## Code of Conduct
+### 📌 Dynamic Attributes (EAV)
+| Method | Endpoint                  | Description                        | Auth Required |
+|--------|---------------------------|------------------------------------|--------------|
+| `GET`  | `/api/attributes`         | Get all attributes                 | ✅ Yes       |
+| `POST` | `/api/attributes`         | Create a new attribute             | ✅ Yes       |
+| `POST` | `/api/attribute-values`   | Assign attribute value to project  | ✅ Yes       |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 📌 Example API Requests & Responses
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1️⃣ Register User
+#### 📌 Request
+```http
+POST /api/register
+```
+#### 📌 Body (JSON)
+```json
+{
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john@example.com",
+    "password": "password123",
+    "password_confirmation": "password123"
+}
+```
+#### 📌 Response (201 Created)
+```json
+{
+    "status": true,
+    "message": "User registered successfully",
+    "user": {
+        "id": 1,
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "john@example.com"
+    },
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOi..."
+}
+```
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# assessment_task
+### 2️⃣ Login User
+#### 📌 Request
+```http
+POST /api/login
+```
+#### 📌 Body (JSON)
+```json
+{
+    "email": "john@example.com",
+    "password": "password123"
+}
+```
+#### 📌 Response (200 OK)
+```json
+{
+    "status": true,
+    "message": "Login successful",
+    "user": {
+        "id": 1,
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "john@example.com"
+    },
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOi..."
+}
+```
+
+---
+
+## 🧑‍💻 Test Credentials
+
+For testing API authentication, use the following credentials:
+
+```
+Email: test@example.com
+Password: password123
+```
+
+Or create a new user using the **register API**.
+
+---
+
+## 💡 Additional Notes
+- All **protected API endpoints** require a **Bearer Token** in the request headers.
+- Use **Postman** or **cURL** to test API endpoints.
+- This project follows **PSR standards and Laravel best practices**.
+
